@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rajat Singh — Java Backend Developer</title>
+<meta name="description" content="Rajat Singh — BCA student specializing in Spring Boot, REST APIs, and MySQL. Building the India Data Center Water Risk Tracker and preparing for Java backend internships." />
+
+<!-- OpenGraph -->
+<meta property="og:title" content="Rajat Singh — Java Backend Developer" />
+<meta property="og:description" content="BCA student specializing in Spring Boot, REST APIs, and MySQL. Backend-first, product-minded." />
+<meta property="og:type" content="website" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563EB'/%3E%3Ctext x='50' y='68' font-size='55' fill='white' text-anchor='middle' font-family='Arial' font-weight='bold'%3ER%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #09090B;
+    --surface: #111827;
+    --surface-2: #14161c;
+    --border: #27272A;
+    --primary: #2563EB;
+    --secondary: #60A5FA;
+    --success: #22C55E;
+    --text: #FAFAFA;
+    --muted: #A1A1AA;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body::after{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  ::selection{background:var(--primary);color:white;}
+
+  a{color:inherit;text-decoration:none;}
+
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* ---------- Loader ---------- */
+  #loader{
+    position:fixed;inset:0;background:var(--bg);z-index:9999;
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:22px;
+    transition:opacity .7s cubic-bezier(.16,1,.3,1), visibility .7s ease;
+  }
+  #loader.hide{opacity:0;visibility:hidden;}
+  .loader-mark{
+    width:44px;height:44px;border-radius:11px;background:var(--primary);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:21px;color:white;
+    animation:loaderScale .9s cubic-bezier(.16,1,.3,1) forwards;
+  }
+  @keyframes loaderScale{
+    0%{transform:scale(.7);opacity:0;}
+    60%{transform:scale(1.06);opacity:1;}
+    100%{transform:scale(1);opacity:1;}
+  }
+  .loader-bar{width:120px;height:2px;background:var(--border);border-radius:2px;overflow:hidden;}
+  .loader-bar::after{
+    content:'';display:block;width:40%;height:100%;background:var(--secondary);
+    animation:loaderBar 1.1s cubic-bezier(.65,0,.35,1) infinite;
+  }
+  @keyframes loaderBar{
+    0%{transform:translateX(-100%);}
+    100%{transform:translateX(350%);}
+  }
+
+  /* ---------- Layout helpers ---------- */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  section{position:relative;}
+  .section-pad{padding:150px 0;}
+  @media(max-width:768px){.section-pad{padding:72px 0;}}
+
+  .eyebrow{
+    display:flex;align-items:center;gap:14px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:20px;
+  }
+  .eyebrow .num{color:var(--secondary);}
+  .eyebrow .line{width:32px;height:1px;background:var(--border);}
+
+  h2.title{
+    font-size:clamp(38px,5.4vw,60px);
+    font-weight:800;letter-spacing:-0.02em;line-height:1.05;margin-bottom:8px;
+  }
+
+  .muted{color:var(--muted);}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 24px;border-radius:10px;font-weight:600;font-size:15px;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    cursor:pointer;border:1px solid transparent;white-space:nowrap;
+  }
+  .btn-primary{background:var(--primary);color:white;}
+  .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 34px -8px rgba(37,99,235,.6);}
+  .btn-arrow svg{transition:transform .25s cubic-bezier(.34,1.56,.64,1);}
+  .btn-arrow:hover svg{transform:translateY(3px);}
+  .btn-outline{background:transparent;border-color:var(--border);color:var(--text);}
+  .btn-outline:hover{border-color:#3f3f46;background:#151519;transform:translateY(-2px) scale(1.02);}
+  .btn-ghost{color:var(--muted);}
+  .btn-ghost:hover{color:var(--text);}
+
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    transition:transform .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .card:hover{transform:translateY(-6px) scale(1.012);border-color:#33333a;background:#141b2c;box-shadow:0 20px 40px -20px rgba(0,0,0,.5);}
+
+  .pill{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px 16px;border-radius:999px;border:1px solid var(--border);
+    background:var(--surface);font-size:14px;color:var(--text);
+  }
+  .pill.green{border-color:rgba(34,197,94,.35);color:var(--success);background:rgba(34,197,94,.08);}
+
+  .tag{
+    padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.03);
+    border:1px solid var(--border);font-size:12px;font-family:'JetBrains Mono',monospace;
+    letter-spacing:.02em;color:var(--muted);
+  }
+
+  .icon-wrap{
+    width:42px;height:42px;border-radius:10px;background:rgba(37,99,235,.1);
+    border:1px solid rgba(37,99,235,.25);display:flex;align-items:center;justify-content:center;color:var(--secondary);
+  }
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @keyframes heroUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+  .hero-anim{opacity:0;animation:heroUp .9s cubic-bezier(.16,1,.3,1) forwards;}
+  .hero-anim.d1{animation-delay:.05s;}
+  .hero-anim.d2{animation-delay:.18s;}
+  .hero-anim.d3{animation-delay:.32s;}
+  .hero-anim.d4{animation-delay:.46s;}
+  .hero-anim.d5{animation-delay:.6s;}
+  .hero-anim.d6{animation-delay:.4s;}
+
+  /* ---------- Nav ---------- */
+  #nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    background:rgba(9,9,11,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease;
+  }
+  #nav.scrolled{border-bottom-color:var(--border);}
+  .nav-inner{
+    max-width:1180px;margin:0 auto;padding:0 24px;height:72px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-weight:800;font-size:18px;letter-spacing:-0.01em;}
+  .logo .dot{color:var(--primary);}
+  .nav-links{display:flex;align-items:center;gap:4px;}
+  .nav-links a{
+    padding:8px 16px;border-radius:999px;font-size:14.5px;color:var(--muted);font-weight:500;
+    transition:color .18s ease, background .18s ease;
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a.active{color:var(--text);background:var(--surface);}
+  .nav-right{display:flex;align-items:center;gap:14px;}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:.25s;}
+
+  @media(max-width:920px){
+    .nav-links{display:none;}
+    .hamburger{display:flex;}
+  }
+
+  /* mobile drawer */
+  #drawer{
+    position:fixed;top:72px;left:0;right:0;bottom:0;background:var(--bg);
+    z-index:999;transform:translateX(100%);transition:transform .35s ease;
+    display:flex;flex-direction:column;padding:32px 24px;gap:6px;
+  }
+  #drawer.open{transform:translateX(0);}
+  #drawer a{padding:16px 8px;font-size:20px;font-weight:600;border-bottom:1px solid var(--border);}
+
+  /* ---------- Hero ---------- */
+  #hero{
+    padding:150px 0 0 0;
+    position:relative;
+    background:
+      radial-gradient(ellipse 900px 560px at 12% -5%, rgba(37,99,235,.24), transparent 62%),
+      radial-gradient(ellipse 700px 460px at 100% 15%, rgba(96,165,250,.13), transparent 60%),
+      radial-gradient(ellipse 500px 400px at 50% 100%, rgba(37,99,235,.06), transparent 65%);
+  }
+  #hero::before{
+    content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+    background-size:160px 100%;
+    -webkit-mask-image:linear-gradient(180deg, black, transparent 70%);
+    mask-image:linear-gradient(180deg, black, transparent 70%);
+  }
+  #hero > *{position:relative;z-index:1;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:center;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:48px;max-width:100%;}}
+
+  .badge{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:9px 18px;border-radius:999px;border:1px solid var(--border);
+    background:var(--surface);font-size:13.5px;margin-bottom:32px;color:var(--muted);
+  }
+  .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 0 3px rgba(34,197,94,.18);}
+
+  .hero-h1{
+    font-size:clamp(52px,7.8vw,100px);font-weight:900;letter-spacing:-0.035em;line-height:0.98;
+  }
+  .hero-h1 .accent{color:var(--secondary);}
+
+  .hero-sub{font-size:19.5px;color:var(--muted);max-width:560px;margin:28px 0 36px;}
+
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:34px;}
+
+  .socials{display:flex;gap:12px;}
+  .social-btn{
+    width:42px;height:42px;border-radius:10px;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+    transition:.2s ease;
+  }
+  .social-btn:hover{color:var(--text);border-color:#3f3f46;background:var(--surface);}
+
+  .hero-photo-wrap{position:relative;}
+  .hero-photo{
+    border-radius:20px;overflow:hidden;border:1px solid var(--border);
+    aspect-ratio:4/5;position:relative;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.65);
+    transition:transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  .hero-photo-wrap:hover .hero-photo{transform:translateY(-4px);}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block;}
+  .hero-photo-caption{
+    position:absolute;left:0;right:0;bottom:0;padding:20px 22px;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,.8) 65%);
+    display:flex;justify-content:space-between;align-items:flex-end;
+  }
+  .hero-photo-caption .name{font-weight:700;font-size:15.5px;}
+  .hero-photo-caption .meta{font-size:12.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+
+  .scroll-cue{
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    margin:64px auto 0;width:fit-content;color:var(--muted);
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;
+  }
+  .scroll-cue .line{width:1px;height:34px;background:linear-gradient(var(--muted),transparent);position:relative;overflow:hidden;}
+  .scroll-cue .line::after{
+    content:'';position:absolute;top:-40px;left:0;width:100%;height:40px;background:var(--secondary);
+    animation:scrolldrop 1.8s ease-in-out infinite;
+  }
+  @keyframes scrolldrop{0%{top:-40px;}100%{top:40px;}}
+
+  /* marquee */
+  .marquee{
+    border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    padding:46px 0;overflow:hidden;white-space:nowrap;margin-top:56px;
+    position:relative;
+    -webkit-mask-image:linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    mask-image:linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+  .marquee-track{display:inline-flex;gap:72px;animation:marquee 42s linear infinite;}
+  .marquee span{
+    font-size:88px;font-weight:800;color:transparent;-webkit-text-stroke:1.8px #3a3a42;
+    display:inline-flex;align-items:center;gap:72px;letter-spacing:-0.015em;
+  }
+  .marquee b{width:9px;height:9px;border-radius:50%;background:var(--primary);-webkit-text-stroke:0;flex-shrink:0;}
+  @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:start;}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;}}
+  .about-lead{font-size:clamp(25px,3.4vw,35px);font-weight:700;letter-spacing:-0.01em;line-height:1.3;margin-bottom:28px;}
+  .about-lead .hl{color:var(--secondary);}
+  .about-body p{color:var(--muted);font-size:16px;margin-bottom:18px;}
+  .about-body b{color:var(--text);font-weight:600;}
+
+  .edu-card{padding:30px;margin-bottom:28px;}
+  .edu-card .eyebrow-inline{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .edu-card h4{font-size:15px;color:var(--muted);font-weight:500;}
+  .edu-card .deg{font-size:19px;font-weight:700;margin-bottom:4px;}
+  .edu-card .school{color:var(--muted);font-size:14.5px;margin-bottom:6px;}
+  .edu-card .dates{font-size:13px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+
+  .focus-label{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+  .focus-tags{display:flex;flex-wrap:wrap;gap:10px;}
+
+  /* ---------- grids ---------- */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media(max-width:860px){.grid-3{grid-template-columns:1fr;}.grid-2{grid-template-columns:1fr;}}
+
+  .stack-card{padding:30px;}
+  .stack-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;}
+  .stack-card-num{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:13px;}
+  .stack-card h3{font-size:19px;font-weight:700;margin-bottom:16px;}
+  .stack-card .tags{display:flex;flex-wrap:wrap;gap:8px;}
+
+  /* achievement cards */
+  .ach-card{padding:28px;}
+  .ach-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+  .ach-cat{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;}
+  .ach-card h3{font-size:18px;font-weight:700;margin-bottom:4px;}
+  .ach-card .sub{color:var(--secondary);font-size:13.5px;margin-bottom:10px;}
+  .ach-card p{color:var(--muted);font-size:14.5px;}
+
+  /* ---------- Case study ---------- */
+  #case-study{background:linear-gradient(180deg, transparent, rgba(37,99,235,.03) 8%, rgba(37,99,235,.03) 92%, transparent);}
+  .cs-tags{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 30px;}
+  .cs-title{font-size:clamp(42px,6.4vw,76px);font-weight:900;letter-spacing:-0.03em;line-height:1.02;margin-bottom:22px;}
+  .cs-desc{color:var(--muted);font-size:18px;max-width:760px;margin-bottom:32px;}
+  .cs-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:70px;}
+
+  .ps-card{padding:34px;}
+  .ps-label{font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--secondary);margin-bottom:16px;}
+  .ps-card.problem .ps-label{color:var(--muted);}
+  .ps-card p{color:var(--text);font-size:15.5px;line-height:1.7;opacity:.9;}
+
+  .sub-eyebrow{font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:64px 0 22px;}
+
+  .feat-card{padding:32px;}
+  .feat-num{color:var(--secondary);font-family:'JetBrains Mono',monospace;font-size:13px;margin-bottom:14px;display:block;}
+  .feat-card h4{font-size:18px;font-weight:700;margin-bottom:10px;}
+  .feat-card p{color:var(--muted);font-size:14.5px;}
+
+  .tech-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
+
+  .dp-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:24px;}
+  @media(max-width:860px){.dp-cols{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.dp-cols{grid-template-columns:1fr;}}
+  .dp-col{border-top:1px solid var(--border);padding-top:18px;}
+  .dp-col .num{color:var(--secondary);font-family:'JetBrains Mono',monospace;font-size:13px;}
+  .dp-col h4{font-size:17px;font-weight:700;margin:10px 0 10px;}
+  .dp-col p{color:var(--muted);font-size:14px;}
+
+  .cl-card{padding:32px;}
+  .cl-card h5{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;}
+  .cl-card h4{font-size:17px;font-weight:700;margin-bottom:10px;}
+  .cl-card p{color:var(--muted);font-size:14.5px;margin-bottom:20px;}
+  .cl-card ul{list-style:none;}
+  .cl-card li{display:flex;gap:10px;color:var(--muted);font-size:14.5px;margin-bottom:14px;align-items:flex-start;}
+  .cl-card li .arrow{color:var(--secondary);flex-shrink:0;}
+
+  /* architecture */
+  .arch-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start;margin-top:24px;}
+  @media(max-width:900px){.arch-grid{grid-template-columns:1fr;}}
+  .arch-img-wrap{
+    border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#0a0b0f;
+  }
+  .arch-img-wrap .browser-bar{
+    background:var(--surface-2);border-bottom:1px solid var(--border);padding:10px 16px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .browser-bar .dot{width:9px;height:9px;border-radius:50%;background:#3a3a40;}
+  .browser-bar span{color:var(--muted);font-size:12px;font-family:'JetBrains Mono',monospace;margin-left:6px;}
+
+  .diagram-wrap{padding:28px 24px 30px;}
+  .dbox{border-radius:10px;padding:14px 16px;border:1px solid var(--border);background:var(--surface);}
+  .dbox h5{font-size:13.5px;font-weight:700;margin-bottom:3px;letter-spacing:-0.01em;}
+  .dbox p{font-size:11.5px;color:var(--muted);line-height:1.5;}
+  .dbox.accent-blue{border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.07);}
+  .dbox.accent-blue h5{color:var(--secondary);}
+  .dbox.accent-green{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.07);}
+  .dbox.accent-green h5{color:var(--success);}
+  .dbox.accent-primary{border-color:rgba(37,99,235,.35);background:rgba(37,99,235,.08);}
+  .dbox.accent-primary h5{color:#93b8fb;}
+  .dplatform{border:1px solid var(--border);border-radius:12px;padding:16px;background:rgba(255,255,255,.02);margin:6px 0;}
+  .dplatform-label{font-size:10.5px;color:var(--muted);margin-bottom:12px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
+  .dplatform-row{display:flex;gap:12px;}
+  @media(max-width:520px){.dplatform-row{flex-direction:column;}}
+  .dplatform-row .dbox{flex:1;}
+  .darrow{display:flex;flex-direction:column;align-items:center;gap:3px;margin:6px 0;color:var(--muted);font-size:10.5px;font-family:'JetBrains Mono',monospace;text-align:center;}
+
+  .arch-steps{display:flex;flex-direction:column;}
+  .arch-step{display:flex;gap:16px;padding-bottom:26px;position:relative;}
+  .arch-step:not(:last-child)::before{
+    content:'';position:absolute;left:20px;top:44px;bottom:0;width:1px;background:var(--border);
+  }
+  .arch-step .icon-wrap{flex-shrink:0;}
+  .arch-step h4{font-size:16.5px;font-weight:700;margin-bottom:4px;}
+  .arch-step p{color:var(--muted);font-size:14px;}
+
+  .arch-note{
+    margin-top:6px;padding:20px 22px;border-radius:12px;background:rgba(37,99,235,.06);
+    border:1px solid rgba(37,99,235,.2);color:var(--muted);font-size:14.5px;line-height:1.7;
+    display:flex;gap:12px;
+  }
+  .arch-note b{color:var(--secondary);}
+
+  .future-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px;}
+  .future-pill{
+    padding:16px 20px;border-radius:12px;border:1px dashed var(--border);color:var(--muted);
+    font-size:14.5px;flex:1;min-width:220px;
+  }
+
+  .deploy-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:70px;}
+  @media(max-width:768px){.deploy-row{grid-template-columns:1fr;}}
+  .deploy-card{padding:20px 22px;display:flex;align-items:center;justify-content:space-between;}
+  .deploy-card .dc-left{display:flex;align-items:center;gap:14px;}
+  .deploy-card .dc-label{color:var(--muted);font-size:13px;}
+  .deploy-card .dc-value{font-weight:700;font-size:15.5px;}
+  .deploy-status{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--success);}
+
+  /* ---------- Journey ---------- */
+  .timeline{position:relative;padding-left:36px;}
+  .timeline::before{content:'';position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--border);}
+  .t-item{position:relative;padding-bottom:38px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-dot{
+    position:absolute;left:-36px;top:4px;width:19px;height:19px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--secondary);
+  }
+  .t-item.current .t-dot{background:var(--primary);border-color:var(--primary);box-shadow:0 0 0 5px rgba(37,99,235,.18);}
+  .t-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .t-head h4{font-size:19px;font-weight:700;}
+  .t-item.current .t-head h4{color:var(--secondary);}
+  .t-date{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);}
+  .t-item p{color:var(--muted);font-size:15px;margin-top:6px;max-width:640px;}
+
+  /* ---------- Contact ---------- */
+  .contact-lead{font-size:clamp(38px,6.4vw,68px);font-weight:900;letter-spacing:-0.03em;margin:20px 0 22px;}
+  .contact-lead .hl{color:var(--secondary);}
+  .contact-sub{color:var(--muted);font-size:17px;max-width:600px;margin-bottom:36px;}
+  .contact-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:54px;}
+  .contact-meta{
+    display:flex;flex-wrap:wrap;align-items:center;gap:26px;
+    border-top:1px solid var(--border);padding-top:30px;color:var(--muted);font-size:14.5px;
+  }
+  .contact-meta .item{display:flex;align-items:center;gap:8px;}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--border);padding:36px 0;}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+  .footer-inner p{color:var(--muted);font-size:13.5px;}
+  .footer-mark{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;}
+
+  svg{display:block;}
+
+  @media(max-width:768px){
+    .grid-3, .grid-2, .deploy-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div id="loader"><div class="loader-mark">R</div><div class="loader-bar"></div></div>
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="logo">Rajat Singh<span class="dot">.</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" data-sec="home">Home</a>
+      <a href="#about" data-sec="about">About</a>
+      <a href="#tech-stack" data-sec="tech-stack">Tech Stack</a>
+      <a href="#case-study" data-sec="case-study">Case Study</a>
+      <a href="#achievements" data-sec="achievements">Achievements</a>
+      <a href="#journey" data-sec="journey">Journey</a>
+      <a href="#contact" data-sec="contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn btn-primary" href="assets/Rajat_Singh_Resume.pdf" download style="padding:10px 18px;font-size:14px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M12 17v-6"/><path d="m9 14 3 3 3-3"/></svg>
+        Resume
+      </a>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+
+<div id="drawer">
+  <a href="#home" data-sec="home">Home</a>
+  <a href="#about" data-sec="about">About</a>
+  <a href="#tech-stack" data-sec="tech-stack">Tech Stack</a>
+  <a href="#case-study" data-sec="case-study">Case Study</a>
+  <a href="#achievements" data-sec="achievements">Achievements</a>
+  <a href="#journey" data-sec="journey">Journey</a>
+  <a href="#contact" data-sec="contact">Contact</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section id="home">
+  <div class="wrap" id="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="badge hero-anim d1"><span class="dot"></span> Open to Java Backend internships · Greater Noida, India</div>
+        <h1 class="hero-h1 hero-anim d2">Java<br>Backend<br>Developer<span class="accent">.</span></h1>
+        <p class="hero-sub hero-anim d3">BCA student specializing in Spring Boot, REST APIs, and MySQL — designing layered backends, practicing DSA daily, and shipping real, deployed software.</p>
+        <div class="hero-actions hero-anim d4">
+          <a href="#case-study" class="btn btn-primary btn-arrow">View Case Study
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          </a>
+          <a href="assets/Rajat_Singh_Resume.pdf" download class="btn btn-outline">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            Download Resume
+          </a>
+          <a href="#contact" class="btn btn-ghost">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6 12 13 2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+            Get In Touch
+          </a>
+        </div>
+        <div class="socials hero-anim d5">
+          <a class="social-btn" href="https://github.com/Rajat-Builds" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.36-3.37-1.36-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.57 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.28 9.28 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.78-4.57 5.04.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+          </a>
+          <a class="social-btn" href="https://www.linkedin.com/in/rajat-singh-29a52a328" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-1.74.33-3.42 2.48-3.42 2.12 0 2.15 1.98 2.15 3.53V21H22v-7.19c0-3.5-.75-6.19-4.84-6.19-1.96 0-3.28 1.08-3.82 2.1h-.05V8.48Z"/></svg>
+          </a>
+          <a class="social-btn" href="https://x.com/RajatBuilds" target="_blank" rel="noopener" aria-label="Twitter">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.4 8.46L23.3 22H16.7l-5.17-6.76L5.6 22H2.5l7.9-9.05L1.7 2h6.75l4.67 6.18L18.9 2Zm-1.16 18.2h1.7L7.35 3.7H5.5l12.24 16.5Z"/></svg>
+          </a>
+          <a class="social-btn" href="mailto:rajatsingh12154@gmail.com" aria-label="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 6-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-photo-wrap hero-anim d6">
+        <div class="hero-photo">
+          <img src="assets/photo.jpg" alt="Rajat Singh" />
+          <div class="hero-photo-caption">
+            <span class="name">Rajat Singh</span>
+            <span class="meta">BCA · 2024–27</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue"><span>SCROLL</span><div class="line"></div></div>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Java <b></b> Spring Boot <b></b> Docker <b></b> MySQL <b></b> GitHub <b></b> DSA <b></b> OOP <b></b> Git <b></b></span>
+      <span>Java <b></b> Spring Boot <b></b> Docker <b></b> MySQL <b></b> GitHub <b></b> DSA <b></b> OOP <b></b> Git <b></b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section-pad">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">01</span><span class="line"></span>BACKEND FIRST</div>
+    <h2 class="title reveal">About</h2>
+
+    <div class="about-grid" style="margin-top:44px;">
+      <div class="reveal">
+        <p class="about-lead">I build the part of a product you don't see — <span class="hl">APIs, data models, and scoring logic</span> that hold up when deployed.</p>
+        <div class="about-body">
+          <p>I'm a <b>BCA student at Greater Noida Institute of Technology (2024–2027)</b>, focused on backend development with Java. My core toolkit is <b>Spring Boot, Spring Data JPA, and MySQL</b> — designing REST APIs with a clean, layered architecture.</p>
+          <p>I don't just build locally. My flagship project, the <b>India Data Center Water Risk Tracker</b>, runs a live Spring Boot backend in a Docker container on Render with an embedded, self-seeding H2 database, talking to a statically hosted frontend — CORS, environment config, and all.</p>
+          <p>Right now I'm deepening my <b>DSA practice</b> (tracked on GitHub) and preparing for Java backend internships.</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="card reveal edu-card">
+          <div class="eyebrow-inline">
+            <div class="icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/></svg>
+            </div>
+            <h4>Education</h4>
+          </div>
+          <div class="deg">Bachelor of Computer Applications</div>
+          <div class="school">Greater Noida Institute of Technology</div>
+          <div class="dates">2024 – 2027 · Greater Noida West</div>
+        </div>
+
+        <div class="focus-label">Focus Areas</div>
+        <div class="focus-tags">
+          <span class="pill">Backend Development</span>
+          <span class="pill">Spring Boot</span>
+          <span class="pill">REST APIs</span>
+          <span class="pill">MySQL</span>
+          <span class="pill">Problem Solving</span>
+          <span class="pill">Continuous Learning</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECH STACK ============ -->
+<section id="tech-stack" class="section-pad">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">02</span><span class="line"></span>ONLY WHAT I ACTUALLY USE</div>
+    <h2 class="title reveal">Tech Stack</h2>
+
+    <div class="grid-3" style="margin-top:44px;">
+      <div class="card reveal stack-card">
+        <div class="stack-card-top">
+          <div class="icon-wrap"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg></div>
+          <span class="stack-card-num">01</span>
+        </div>
+        <h3>Programming Languages</h3>
+        <div class="tags"><span class="tag">Java</span></div>
+      </div>
+
+      <div class="card reveal stack-card">
+        <div class="stack-card-top">
+          <div class="icon-wrap"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 9 4.5-9 4.5-9-4.5L12 2Z"/><path d="m3 11.5 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/></svg></div>
+          <span class="stack-card-num">02</span>
+        </div>
+        <h3>Frameworks &amp; Libraries</h3>
+        <div class="tags"><span class="tag">Spring Boot</span><span class="tag">Spring Data JPA</span></div>
+      </div>
+
+      <div class="card reveal stack-card">
+        <div class="stack-card-top">
+          <div class="icon-wrap"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></div>
+          <span class="stack-card-num">03</span>
+        </div>
+        <h3>Database</h3>
+        <div class="tags"><span class="tag">MySQL</span></div>
+      </div>
+
+      <div class="card reveal stack-card">
+        <div class="stack-card-top">
+          <div class="icon-wrap"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 1.4 1.4l3.6-3.6a1 1 0 0 0-1.4-1.4l-3.6 3.6ZM4 20l4.586-4.586M13.5 5.5l5 5L9 20l-6 1 1-6 9.5-9.5Z"/></svg></div>
+          <span class="stack-card-num">04</span>
+        </div>
+        <h3>Tools &amp; Platforms</h3>
+        <div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Postman</span><span class="tag">IntelliJ IDEA</span><span class="tag">VS Code</span><span class="tag">Docker</span></div>
+      </div>
+
+      <div class="card reveal stack-card">
+        <div class="stack-card-top">
+          <div class="icon-wrap"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5Z"/></svg></div>
+          <span class="stack-card-num">05</span>
+        </div>
+        <h3>Currently Sharpening</h3>
+        <div class="tags"><span class="tag">Data Structures &amp; Algorithms</span><span class="tag">OOP</span><span class="tag">REST API Design</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASE STUDY ============ -->
+<section id="case-study" class="section-pad">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">03</span><span class="line"></span>ONE PROJECT, DONE PROPERLY</div>
+    <h2 class="title reveal">Case Study</h2>
+
+    <div class="cs-tags reveal">
+      <span class="pill">Full-stack</span>
+      <span class="pill">Dockerized</span>
+      <span class="pill">Self-built</span>
+      <span class="pill">2026</span>
+      <span class="pill green"><span class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--success);"></span> Live</span>
+    </div>
+
+    <h3 class="cs-title reveal">India Data Center Water Risk Tracker</h3>
+    <p class="cs-desc reveal">A full-stack application that analyzes groundwater stress in relation to data center locations and disclosure transparency across 10 Indian data center facilities — including sites operated by AWS, Google, Microsoft, and Meta.</p>
+
+    <div class="cs-actions reveal">
+      <a href="https://rajat-builds.github.io/india-water-risk-tracker/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+      </a>
+      <a href="https://github.com/Rajat-Builds/india-water-risk-tracker" target="_blank" rel="noopener" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.36-3.37-1.36-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.57 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.28 9.28 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.78-4.57 5.04.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+        GitHub
+      </a>
+    </div>
+
+    <!-- Problem / Solution -->
+    <div class="grid-2">
+      <div class="card reveal ps-card problem">
+        <div class="ps-label">Problem</div>
+        <p>Data centers depend on significant water resources, yet facility-level groundwater stress and disclosure transparency across India are scattered and hard to compare. There was no single place to see how 10 major facilities stack up on both risk and openness.</p>
+      </div>
+      <div class="card reveal ps-card">
+        <div class="ps-label">Solution</div>
+        <p>A Dockerized Spring Boot backend with an embedded, self-seeding H2 database and a custom risk-scoring engine that grades each facility on groundwater stress and disclosure quality, a Gemini-powered AI assistant that answers natural-language questions about facility profiles, and a scroll-driven dashboard built on verified data from public sources.</p>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="sub-eyebrow reveal">Features</div>
+    <div class="grid-3">
+      <div class="card reveal feat-card">
+        <span class="feat-num">01</span>
+        <h4>Risk-scoring engine</h4>
+        <p>Custom scoring that assesses groundwater stress and disclosure quality for 10 data center facilities.</p>
+      </div>
+      <div class="card reveal feat-card">
+        <span class="feat-num">02</span>
+        <h4>AI assistant</h4>
+        <p>Context-aware, multi-turn assistant built on the Google Gemini API — answers natural-language questions about all 10 facility profiles.</p>
+      </div>
+      <div class="card reveal feat-card">
+        <span class="feat-num">03</span>
+        <h4>Scroll-driven dashboard</h4>
+        <p>An interactive, scroll-based map visualizing 10 independently researched facilities with location details, risk scores, and sustainability insights.</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px;">
+      <div class="card reveal feat-card">
+        <span class="feat-num">04</span>
+        <h4>Layered backend</h4>
+        <p>Controller → Service → Repository architecture with Spring Data JPA over an embedded H2 database — no external DB service to provision or manage.</p>
+      </div>
+      <div class="card reveal feat-card">
+        <span class="feat-num">05</span>
+        <h4>Production deployment</h4>
+        <p>Backend live in a Docker container on Render, frontend on GitHub Pages — with CORS and environment variables configured for reliable API communication.</p>
+      </div>
+    </div>
+
+    <!-- Technology stack -->
+    <div class="sub-eyebrow reveal">Technology Stack</div>
+    <div class="tech-pills reveal">
+      <span class="tag" style="padding:10px 18px;font-size:13.5px;">Java 21</span>
+      <span class="tag" style="padding:10px 18px;font-size:13.5px;">Spring Boot</span>
+      <span class="tag" style="padding:10px 18px;font-size:13.5px;">Spring Data JPA</span>
+      <span class="tag" style="padding:10px 18px;font-size:13.5px;">H2 Database</span>
+      <span class="tag" style="padding:10px 18px;font-size:13.5px;">Docker</span>
+      <span class="tag" style="padding:10px 18px;font-size:13.5px;">Google Gemini API</span>
+      <span class="tag" style="padding:10px 18px;font-size:13.5px;">Vanilla JavaScript</span>
+      <span class="tag" style="padding:10px 18px;font-size:13.5px;">HTML</span>
+      <span class="tag" style="padding:10px 18px;font-size:13.5px;">CSS</span>
+    </div>
+
+    <!-- Development process -->
+    <div class="sub-eyebrow reveal">Development Process</div>
+    <div class="dp-cols">
+      <div class="dp-col reveal">
+        <span class="num">01</span>
+        <h4>Fundamentals</h4>
+        <p>Built practice REST APIs — Student &amp; Library Management — with full CRUD, service layers, and validation.</p>
+      </div>
+      <div class="dp-col reveal">
+        <span class="num">02</span>
+        <h4>Design</h4>
+        <p>Modeled four JPA entities: DataCenter, RiskScore, UsageRecord, and Stress.</p>
+      </div>
+      <div class="dp-col reveal">
+        <span class="num">03</span>
+        <h4>Build</h4>
+        <p>Implemented the risk-scoring engine and integrated the Gemini API for multi-turn, context-aware chat.</p>
+      </div>
+      <div class="dp-col reveal">
+        <span class="num">04</span>
+        <h4>Ship</h4>
+        <p>Deployed the backend in a Docker container on Render and the frontend on GitHub Pages, wiring CORS and environment variables.</p>
+      </div>
+    </div>
+
+    <!-- Challenges / Lessons -->
+    <div class="grid-2" style="margin-top:56px;">
+      <div class="card reveal cl-card">
+        <h5>Challenges</h5>
+        <h4>Cross-origin communication</h4>
+        <p>A statically hosted frontend on GitHub Pages talking to a Dockerized backend on Render — solved with explicit CORS configuration and environment-based API URLs.</p>
+        <h4>Uneven public data</h4>
+        <p>Disclosure quality varies widely across facilities, so the scoring engine grades transparency itself — not just raw water-stress numbers.</p>
+      </div>
+      <div class="card reveal cl-card">
+        <h5>Lessons Learned</h5>
+        <ul>
+          <li><span class="arrow">→</span>Layered architecture (Controller → Service → Repository) kept the codebase easy to extend as features grew.</li>
+          <li><span class="arrow">→</span>Environment configuration deserves as much care as the code when deploying across platforms.</li>
+          <li><span class="arrow">→</span>Shipping a live system teaches more than building locally forever.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Architecture -->
+    <div class="eyebrow reveal" style="margin-top:80px;"><span class="num">04</span><span class="line"></span>ARCHITECTURE</div>
+    <h2 class="title reveal">Inside the System</h2>
+
+    <div class="arch-grid reveal">
+      <div class="arch-img-wrap">
+        <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>water-risk-tracker · architecture</span></div>
+        <div class="diagram-wrap">
+          <div class="dbox accent-blue">
+            <h5>GitHub Pages frontend</h5>
+            <p>Vanilla JS + GSAP scroll story</p>
+          </div>
+          <div class="darrow">
+            <span>HTTPS request (CORS allowed)</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          </div>
+          <div class="dplatform">
+            <div class="dplatform-label">Render platform · Docker container</div>
+            <div class="dplatform-row">
+              <div class="dbox accent-green">
+                <h5>Spring Boot 4.1.0</h5>
+                <p>Java 21 · Controller → Service → Repository</p>
+              </div>
+              <div class="dbox accent-primary">
+                <h5>Embedded H2 database</h5>
+                <p>Auto-seeds 10 facilities on startup · no external DB</p>
+              </div>
+            </div>
+          </div>
+          <div class="darrow">
+            <span>Calls Gemini for AI chat + summaries</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          </div>
+          <div class="dbox" style="border-color:rgba(250,250,250,.12);">
+            <h5 style="color:var(--text);">Google Gemini API</h5>
+            <p>External AI service</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="arch-steps">
+          <div class="arch-step">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg></div>
+            <div><h4>GitHub Pages — Frontend</h4><p>Vanilla JS + GSAP scroll story</p></div>
+          </div>
+          <div class="arch-step">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></div>
+            <div><h4>Docker — Backend</h4><p>Spring Boot 4.1.0 (Java 21), multi-stage build for a lean production image</p></div>
+          </div>
+          <div class="arch-step">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></div>
+            <div><h4>Embedded H2 — Database</h4><p>Auto-seeds 10 facilities + risk scores on startup; self-healing logic recalculates anything missing</p></div>
+          </div>
+          <div class="arch-step">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></div>
+            <div><h4>Google Gemini API</h4><p>AI chat + summaries</p></div>
+          </div>
+        </div>
+
+        <div class="arch-note">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px;color:var(--secondary);"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          <p>The backend runs in a Docker container on <b>Render</b> with an embedded H2 database — no external database service required. Seed logic recalculates any missing risk scores on every startup, so the live demo stays fully populated. The frontend calls it over HTTPS with CORS explicitly allowed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Future improvements -->
+    <div class="sub-eyebrow reveal">Future Improvements</div>
+    <div class="future-row reveal">
+      <div class="future-pill">Expand coverage beyond the current 10 facilities</div>
+      <div class="future-pill">Deepen the AI assistant's multi-turn reasoning</div>
+      <div class="future-pill">Automate refresh of facility records</div>
+    </div>
+
+    <!-- Deployment -->
+    <div class="deploy-row">
+      <div class="card reveal deploy-card">
+        <div class="dc-left">
+          <div class="icon-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 10 18H2Z"/></svg></div>
+          <div><div class="dc-label">This Portfolio</div><div class="dc-value">Vercel</div></div>
+        </div>
+        <span class="deploy-status">HOSTING</span>
+      </div>
+      <div class="card reveal deploy-card">
+        <div class="dc-left">
+          <div class="icon-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="7" rx="1.5"/><rect x="2" y="14" width="20" height="7" rx="1.5"/></svg></div>
+          <div><div class="dc-label">Project Backend</div><div class="dc-value">Render</div></div>
+        </div>
+        <span class="deploy-status">HOSTING</span>
+      </div>
+      <div class="card reveal deploy-card">
+        <div class="dc-left">
+          <div class="icon-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.36-3.37-1.36-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.57 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.28 9.28 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.78-4.57 5.04.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg></div>
+          <div><div class="dc-label">Project Frontend</div><div class="dc-value">GitHub Pages</div></div>
+        </div>
+        <span class="deploy-status">HOSTING</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACHIEVEMENTS ============ -->
+<section id="achievements" class="section-pad">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">05</span><span class="line"></span>EARNED, NOT CLAIMED</div>
+    <h2 class="title reveal">Achievements</h2>
+
+    <div class="grid-3" style="margin-top:44px;">
+      <div class="card reveal ach-card">
+        <div class="ach-top">
+          <div class="icon-wrap"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3a3 3 0 0 1-3 5M7 5H4a3 3 0 0 0 3 5"/></svg></div>
+          <span class="ach-cat">Hackathon</span>
+        </div>
+        <h3>Top 12 Finalist</h3>
+        <div class="sub">Mind Installers Hackathon 3.0</div>
+        <p>12th place among 2,000+ teams · IIMT College of Engineering · May 2025</p>
+      </div>
+
+      <div class="card reveal ach-card">
+        <div class="ach-top">
+          <div class="icon-wrap"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
+          <span class="ach-cat">Recognition</span>
+        </div>
+        <h3>Microsoft Learn Student Ambassador</h3>
+        <div class="sub">Recognition</div>
+        <p>Microsoft Learn Student Ambassador program</p>
+      </div>
+
+      <div class="card reveal ach-card">
+        <div class="ach-top">
+          <div class="icon-wrap"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/></svg></div>
+          <span class="ach-cat">Certification</span>
+        </div>
+        <h3>NPTEL Certification</h3>
+        <div class="sub">IIT Madras</div>
+        <p>Complete Guide for Campus Interviews — 4-week course</p>
+      </div>
+
+      <div class="card reveal ach-card">
+        <div class="ach-top">
+          <div class="icon-wrap"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></div>
+          <span class="ach-cat">Hackathon</span>
+        </div>
+        <h3>SheBuilds Hackathon</h3>
+        <div class="sub">Certificate</div>
+        <p>Hackathon participation certificate</p>
+      </div>
+
+      <div class="card reveal ach-card">
+        <div class="ach-top">
+          <div class="icon-wrap"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="m9 14-1.5 8L12 19l4.5 3L15 14"/></svg></div>
+          <span class="ach-cat">Ideathon</span>
+        </div>
+        <h3>4th Place</h3>
+        <div class="sub">9-Day Ideathon</div>
+        <p>SwiftCare — AI healthcare concept</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:24px;padding:26px 28px;">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px;">
+        <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.05V17h6v-2.25c0-.85.4-1.55 1-2.05A7 7 0 0 0 12 2Z"/></svg></div>
+        <h4 style="font-size:18px;font-weight:700;">SwiftCare — AI Healthcare Concept</h4>
+        <span class="pill green" style="font-size:12.5px;padding:5px 12px;">4th Place · 9-Day Ideathon</span>
+      </div>
+      <p class="muted" style="font-size:15px;">An AI healthcare concept pitched at a 9-day ideathon, where it placed 4th.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section id="journey" class="section-pad">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">06</span><span class="line"></span>HOW I GOT HERE</div>
+    <h2 class="title reveal">Journey</h2>
+
+    <div class="timeline" style="margin-top:48px;max-width:760px;">
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-head"><h4>Started BCA</h4><span class="t-date">2024</span></div>
+        <p>Computer Applications at Greater Noida Institute of Technology.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-head"><h4>Started Java</h4></div>
+        <p>Chose Java as my primary backend language.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-head"><h4>Learned OOP</h4></div>
+        <p>Object-oriented programming fundamentals, practiced in Java.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-head"><h4>Spring Boot</h4></div>
+        <p>Controllers, services, and layered architecture.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-head"><h4>REST APIs</h4></div>
+        <p>CRUD endpoints, validation, and testing with Postman.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-head"><h4>MySQL</h4></div>
+        <p>Schema design with Spring Data JPA.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-head"><h4>Hackathon Finalist</h4><span class="t-date">May 2025</span></div>
+        <p>Top 12 of 2,000+ teams — Mind Installers Hackathon 3.0.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <div class="t-head"><h4>Built the Water Risk Tracker</h4><span class="t-date">2026</span></div>
+        <p>Full-stack and live: Dockerized Spring Boot + embedded H2 on Render, frontend on GitHub Pages.</p>
+      </div>
+      <div class="t-item current reveal">
+        <div class="t-dot"></div>
+        <div class="t-head"><h4>Preparing for a Java Backend internship</h4><span class="t-date">Now</span></div>
+        <p>Consistent DSA practice, tracked on GitHub.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="section-pad">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">07</span><span class="line"></span>SAY HELLO</div>
+    <h2 class="title reveal">Contact</h2>
+
+    <h3 class="contact-lead reveal">Let's talk <span class="hl">backend</span>.</h3>
+    <p class="contact-sub reveal">I'm preparing for Java backend internships. If you're hiring — or just want to talk Spring Boot — my inbox is open.</p>
+
+    <div class="contact-actions reveal">
+      <a href="mailto:rajatsingh12154@gmail.com" class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 6-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        rajatsingh12154@gmail.com
+      </a>
+      <a href="assets/Rajat_Singh_Resume.pdf" download class="btn btn-outline">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        Download Resume
+      </a>
+    </div>
+
+    <div class="socials reveal" style="margin-bottom:30px;">
+      <a class="social-btn" href="https://github.com/Rajat-Builds" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.36-3.37-1.36-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.57 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.28 9.28 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.78-4.57 5.04.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+      </a>
+      <a class="social-btn" href="https://www.linkedin.com/in/rajat-singh-29a52a328" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-1.74.33-3.42 2.48-3.42 2.12 0 2.15 1.98 2.15 3.53V21H22v-7.19c0-3.5-.75-6.19-4.84-6.19-1.96 0-3.28 1.08-3.82 2.1h-.05V8.48Z"/></svg>
+      </a>
+      <a class="social-btn" href="https://x.com/RajatBuilds" target="_blank" rel="noopener" aria-label="Twitter">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.4 8.46L23.3 22H16.7l-5.17-6.76L5.6 22H2.5l7.9-9.05L1.7 2h6.75l4.67 6.18L18.9 2Zm-1.16 18.2h1.7L7.35 3.7H5.5l12.24 16.5Z"/></svg>
+      </a>
+      <a class="social-btn" href="mailto:rajatsingh12154@gmail.com" aria-label="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 6-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+      </a>
+    </div>
+
+    <div class="contact-meta reveal">
+      <span class="item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        +91 9818767218
+      </span>
+      <span class="item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        Greater Noida, India
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap footer-inner">
+    <p>© 2026 Rajat Singh · Greater Noida, India</p>
+    <p class="mono">Built with HTML · CSS · JavaScript · Deployed on Vercel</p>
+    <div class="footer-mark">R</div>
+  </div>
+</footer>
+
+<script>
+  // loader
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('loader').classList.add('hide'), 750);
+  });
+
+  // nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // mobile drawer
+  const hamburger = document.getElementById('hamburger');
+  const drawer = document.getElementById('drawer');
+  hamburger.addEventListener('click', () => drawer.classList.toggle('open'));
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => drawer.classList.remove('open')));
+
+  // scroll spy
+  const sections = document.querySelectorAll('section[id]');
+  const navA = document.querySelectorAll('#navLinks a');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navA.forEach(a => a.classList.toggle('active', a.dataset.sec === entry.target.id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(s => spy.observe(s));
+
+  // reveal on scroll (staggered by position among siblings)
+  const revealEls = document.querySelectorAll('.reveal');
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const siblings = Array.from(e.target.parentElement.children).filter(c => c.classList.contains('reveal'));
+        const idx = siblings.indexOf(e.target);
+        e.target.style.transitionDelay = Math.min(idx * 90, 450) + 'ms';
+        e.target.classList.add('in');
+        ro.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => ro.observe(el));
+</script>
+
+</body>
+</html>
